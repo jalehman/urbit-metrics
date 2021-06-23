@@ -1,0 +1,26 @@
+{
+  "name": "metrics",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "migrate": "node-pg-migrate",
+    "reset": "yarn run migrate down && yarn run migrate up",
+    "pull-radar": "node src/pull-radar.js",
+    "insert-ping": "node src/insert-ping.js",
+    "update-ping": "yarn pull-radar && yarn insert-ping",
+    "reset-azimuth": "node src/pull-azimuth-events.js && node src/insert-azimuth-events.js",
+    // "insert-ships": "node src/insert-ships.js"
+  },
+  "dependencies": {
+    "csv-parse": "^4.16.0",
+    "dotenv": "^10.0.0",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "https": "^1.0.0",
+    "node-pg-migrate": "^5.9.0",
+    "pg": "^8.6.0",
+    "pg-format": "^1.0.4",
+    "urbit-ob": "^5.0.1"
+  }
+}
