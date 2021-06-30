@@ -9,8 +9,7 @@
     "pull-radar": "node src/pull-radar.js",
     "insert-ping": "node src/insert-ping.js",
     "update-ping": "yarn pull-radar && yarn insert-ping",
-    "reset-azimuth": "node src/pull-azimuth-events.js && node src/insert-azimuth-events.js",
-    // "insert-ships": "node src/insert-ships.js"
+    "reset-azimuth": "node src/pull-azimuth-events.js && node src/insert-azimuth-events.js"
   },
   "dependencies": {
     "csv-parse": "^4.16.0",
