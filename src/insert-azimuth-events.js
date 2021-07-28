@@ -8,11 +8,11 @@ const { client  } = require('./db');
 const AZIMUTH_EVENTS = "events.txt";
 const rows = [];
 
-const readCsv = () => {
+const readCsv = (file) => {
     return new Promise((resolve, reject) => {
         const rows = [];
         console.log('reading csv...')
-        fs.createReadStream(AZIMUTH_EVENTS)
+        fs.createReadStream(file)
             .pipe(csv({ relax_column_count: true }))
             .on('data', (row) => {
                 rows.push(row);
@@ -116,8 +116,9 @@ const insert = (rows) => {
 
 const run = async () => {
 
-    const rows = await readCsv();
-    const s = insert(rows.slice(1));
+    const oldRows = await readCsv("historic-events.csv");
+    const newRows = await readCsv(AZIMUTH_EVENTS);
+    const s = insert(newRows.slice(1).concat(oldRows.slice(1)));
 
     try {
         await client.connect();

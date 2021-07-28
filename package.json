@@ -20,6 +20,7 @@
     "node-pg-migrate": "^5.9.0",
     "pg": "^8.6.0",
     "pg-format": "^1.0.4",
-    "urbit-ob": "^5.0.1"
+    "urbit-ob": "^5.0.1",
+    "yargs": "^17.0.1"
   }
 }

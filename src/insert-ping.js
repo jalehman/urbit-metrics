@@ -1,6 +1,7 @@
 require('dotenv').config();
 const format = require('pg-format');
 const fs = require('fs');
+const yargs = require('yargs');
 
 const { client  } = require('./db');
 
@@ -32,8 +33,8 @@ const takeWhile = (array, pred) => {
     return acc;
 }
 
-const run = async () => {
-    const file = fs.readFileSync('radar.json', 'utf8');
+const run = async (filename) => {
+    const file = fs.readFileSync(filename, 'utf8');
     const data = JSON.parse(file);
 
     try {
@@ -77,4 +78,16 @@ const run = async () => {
 
 }
 
-run();
+const argv = yargs
+      .option('file', {
+          alias: 'f',
+          type: 'string',
+          description: 'The file to import radar data from'
+      })
+      .help()
+      .argv;
+
+if (!argv.file) {
+    process.exit(1);
+}
+run(argv.file);
